@@ -19,9 +19,10 @@ namespace AppWebApi.Controllers
     [Route("api/[controller]/[action]")]
     public class csAdminController : Controller
     {
-        private const string seedSource = "./friends-seeds.json";
 
-        //GET: api/musicgroups/seed?count={count}
+        private IAnimalsService _service = null;
+
+        //GET: api/csAdmin/Info
         [HttpGet()]
         [ActionName("Info")]
         [ProducesResponseType(200, Type = typeof(csConfAddress))]
@@ -39,22 +40,19 @@ namespace AppWebApi.Controllers
            
         }
 
+        //GET: api/csAdmin/AfricanAnimals
         [HttpGet()]
         [ActionName("AfricanAnimals")]
         [ProducesResponseType(200, Type = typeof(csAnimal))]
         [ProducesResponseType(400, Type = typeof(string))]
-        public async Task<IActionResult> AfricanAnimals(string count)
+        public async Task<IActionResult> AfricanAnimals(string count = "5")
         {
             try
             {
                 int _count = int.Parse(count);
 
-                var fn = Path.GetFullPath(seedSource);
-                var _seeder = new csSeedGenerator(fn);
+                var animals = _service.AfricanAnimals(_count);
 
-                //var animal = new csAnimal().Seed(_seeder);
-
-                var animals = _seeder.ItemsToList<csAnimal>(_count);
                 return Ok(animals);
             }
             catch (Exception ex)
@@ -62,6 +60,33 @@ namespace AppWebApi.Controllers
                 return BadRequest(ex.Message);
             }
            
+        }
+
+
+
+        //GET: api/csAdmin/AfricanAnimals
+        [HttpGet()]
+        [ActionName("Singleton")]
+        [ProducesResponseType(200, Type = typeof(csSingleton))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> Singleton()
+        {
+            try
+            {
+                var si = csSingleton.Instance;
+
+                return Ok(si);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
+        }
+
+        public csAdminController(IAnimalsService service, ICustomerService )
+        {
+            _service = service;
         }
     }
 }

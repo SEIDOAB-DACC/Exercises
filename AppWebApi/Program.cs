@@ -18,6 +18,13 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+#region Dependency Inject
+//builder.Services.AddSingleton<IAnimalsService,csAnimalsService2>();
+builder.Services.AddSingleton<IAnimalsService,csAnimalsService1>();
+builder.Services.AddSingleton<ICustomerService,csCustomerService1>();
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,10 +46,12 @@ app.UseCors(x => x
 
 app.MapControllers();
 
+
+/*
 var _service = new WeatherService();
 app.MapGet("/WeeklyForecast", () =>_service.WeeklyForecast());
 app.MapGet("/BiWeeklyForecast", () =>_service.BiWeeklyForecast());
-
+*/
 
 app.Run();
 
