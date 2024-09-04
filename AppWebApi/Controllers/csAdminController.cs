@@ -21,6 +21,7 @@ namespace AppWebApi.Controllers
     {
 
         private IAnimalsService _service = null;
+        private IAttractionService _aservice = null;
 
         //GET: api/csAdmin/Info
         [HttpGet()]
@@ -43,7 +44,7 @@ namespace AppWebApi.Controllers
         //GET: api/csAdmin/AfricanAnimals
         [HttpGet()]
         [ActionName("AfricanAnimals")]
-        [ProducesResponseType(200, Type = typeof(csAnimal))]
+        [ProducesResponseType(200, Type = typeof(List<csAnimal>))]
         [ProducesResponseType(400, Type = typeof(string))]
         public async Task<IActionResult> AfricanAnimals(string count = "5")
         {
@@ -62,6 +63,28 @@ namespace AppWebApi.Controllers
            
         }
 
+        //GET: api/csAdmin/Attractions
+        [HttpGet()]
+        [ActionName("Attractions")]
+        [ProducesResponseType(200, Type = typeof(List<csAttraction>))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> Attractions(string count = "5")
+        {
+            try
+            {
+                int _count = int.Parse(count);
+
+                var s = new csAttractionService();
+                var attractions = s.Attractions(_count);
+
+                return Ok(attractions);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
+        }
 
 
         //GET: api/csAdmin/AfricanAnimals
@@ -84,9 +107,10 @@ namespace AppWebApi.Controllers
            
         }
 
-        public csAdminController(IAnimalsService service)
+        public csAdminController(IAnimalsService service, IAttractionService aservice)
         {
             _service = service;
+            _aservice = aservice;
         }
     }
 }
