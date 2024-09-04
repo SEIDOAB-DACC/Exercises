@@ -84,7 +84,7 @@ namespace AppWebApi.Controllers
            
         }
 
-        public csAdminController(IAnimalsService service, ICustomerService )
+        public csAdminController(IAnimalsService service)
         {
             _service = service;
         }
