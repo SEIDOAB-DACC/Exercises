@@ -1,8 +1,6 @@
 Exercise 2:
 
-In Models
-
-1. Create a model of an Attraction calles csAttraction
+1. In Models Create a model of an Attraction calles csAttraction
 
     Attraction shall have a name (string) and List of Comments (List<string>) , 5-20.
     Use csSeeder to seed an instance of csAttraction.
