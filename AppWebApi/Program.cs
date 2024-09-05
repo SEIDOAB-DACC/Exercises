@@ -18,6 +18,9 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+#region Dependency Inject Custom logger
+builder.Services.AddSingleton<ILoggerProvider, csInMemoryLoggerProvider>();
+#endregion
 
 #region Dependency Inject
 //builder.Services.AddSingleton<IAnimalsService,csAnimalsService2>();

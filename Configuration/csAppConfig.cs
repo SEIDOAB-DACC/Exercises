@@ -5,6 +5,7 @@ namespace Configuration;
 public class csAppConfig
 {
     public const string Appsettingfile = "appsettings.json";
+    public const string UsersecretId = "b611a1d3-9a8e-4711-96dc-95252a346a60";
 
     #region Singleton design pattern
     private static csAppConfig _instance = null;
@@ -20,6 +21,9 @@ public class csAppConfig
     {
         var builder = new ConfigurationBuilder()
                             .SetBasePath(Directory.GetCurrentDirectory());
+
+        builder = builder.AddUserSecrets(UsersecretId, reloadOnChange: true);
+
         builder = builder.AddJsonFile(Appsettingfile, optional: true, reloadOnChange: true);
         _configuration = builder.Build();
 

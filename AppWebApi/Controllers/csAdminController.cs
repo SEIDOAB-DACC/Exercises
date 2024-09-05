@@ -19,6 +19,7 @@ namespace AppWebApi.Controllers
     [Route("api/[controller]/[action]")]
     public class csAdminController : Controller
     {
+        private ILogger<csAdminController> _logger = null;
 
         private IAnimalsService _service = null;
         private IAttractionService _aservice = null;
@@ -32,6 +33,7 @@ namespace AppWebApi.Controllers
         {
             try
             {
+                _logger.LogInformation("Endpoint Info executed");
                 return Ok(csAppConfig.Address);
             }
             catch (Exception ex)
@@ -50,6 +52,7 @@ namespace AppWebApi.Controllers
         {
             try
             {
+                _logger.LogInformation("Endpoint AfricanAnimals executed");
                 int _count = int.Parse(count);
 
                 var animals = _service.AfricanAnimals(_count);
@@ -70,7 +73,8 @@ namespace AppWebApi.Controllers
         [ProducesResponseType(400, Type = typeof(string))]
         public async Task<IActionResult> Attractions(string count = "5")
         {
-            try
+            _logger.LogInformation("Endpoint Attractions executed");
+           try
             {
                 int _count = int.Parse(count);
 
@@ -96,6 +100,7 @@ namespace AppWebApi.Controllers
         {
             try
             {
+                _logger.LogInformation("Endpoint Singleton executed");
                 var si = csSingleton.Instance;
 
                 return Ok(si);
@@ -107,10 +112,24 @@ namespace AppWebApi.Controllers
            
         }
 
-        public csAdminController(IAnimalsService service, IAttractionService aservice)
+        //GET: api/csAdmin/log
+        [HttpGet()]
+        [ActionName("Log")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<csLogMessage>))]
+        public async Task<IActionResult> Log([FromServices] ILoggerProvider _loggerProvider)
+        {
+            //Note the way to get the LoggerProvider, not the logger from Services via DI
+            if (_loggerProvider is csInMemoryLoggerProvider cl)
+            {
+                return Ok(await cl.MessagesAsync);
+            }
+            return Ok("No messages in log");
+        }
+        public csAdminController(IAnimalsService service, IAttractionService aservice, ILogger<csAdminController> logger)
         {
             _service = service;
             _aservice = aservice;
+            _logger = logger;
         }
     }
 }
