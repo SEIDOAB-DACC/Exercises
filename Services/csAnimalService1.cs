@@ -8,14 +8,18 @@ public class csAnimalsService1: IAnimalsService {
 
         private const string seedSource = "./friends-seeds1.json";
 
-        public List<csAnimal> AfricanAnimals(int _count)
+        public List<IAnimal> AfricanAnimals(int _count)
         {
             var fn = Path.GetFullPath(seedSource);
             var _seeder = new csSeedGenerator(fn);
 
             //var animal = new csAnimal().Seed(_seeder);
 
-            var animals = _seeder.ItemsToList<csAnimal>(_count);
+            // List<IAnimal> animals = new List<IAnimal>();
+            // animals.Add(new csAnimal(){ Name = "AAAA"});
+            // animals.Add(new csAnimal(){ Name = "BBBB"});
+
+            var animals = _seeder.ItemsToList<csAnimal>(_count).ToList<IAnimal>();
             return animals;
         }
 }

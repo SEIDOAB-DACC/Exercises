@@ -6,5 +6,5 @@ namespace Services;
 
 public interface IAnimalsService {
 
-    public List<csAnimal> AfricanAnimals(int _count);
+    public List<IAnimal> AfricanAnimals(int _count);
 }

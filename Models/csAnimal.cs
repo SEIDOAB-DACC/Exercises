@@ -3,8 +3,17 @@ using Seido.Utilities.SeedGenerator;
 
 namespace Models;
 
+public interface IAnimal
+{
+    public AnimalKind Kind { get; set; }
+    public int Age { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+
+
 public enum AnimalKind {Zebra, Elephant, Lion, Leopard, Gasell}
-public class csAnimal :ISeed<csAnimal>
+public class csAnimal :ISeed<csAnimal>, IAnimal
 {
     public AnimalKind Kind { get; set; }
     public int Age { get; set; }

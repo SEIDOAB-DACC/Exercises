@@ -7,9 +7,9 @@ namespace Services;
 public class csAnimalsService2: IAnimalsService {
 
         private const string seedSource = "./friends-seeds2.json";
-        private List<csAnimal> _animals;
+        private List<IAnimal> _animals;
 
-        public List<csAnimal> AfricanAnimals(int _count)
+        public List<IAnimal> AfricanAnimals(int _count)
         {
 
             return _animals;
@@ -21,6 +21,6 @@ public class csAnimalsService2: IAnimalsService {
             var _seeder = new csSeedGenerator(fn);
 
             //var animal = new csAnimal().Seed(_seeder);
-             _animals = _seeder.ItemsToList<csAnimal>(5);
+             _animals = _seeder.ItemsToList<csAnimal>(5).ToList<IAnimal>();
         }
 }

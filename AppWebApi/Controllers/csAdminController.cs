@@ -33,10 +33,11 @@ namespace AppWebApi.Controllers
             try
             {
                 _logger.LogInformation("Endpoint Info executed");
-                return Ok(csAppConfig.Address);
+                return Ok(csAppConfig.SecretKeys);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
            
@@ -47,19 +48,23 @@ namespace AppWebApi.Controllers
         [ActionName("AfricanAnimals")]
         [ProducesResponseType(200, Type = typeof(List<csAnimal>))]
         [ProducesResponseType(400, Type = typeof(string))]
-        public async Task<IActionResult> AfricanAnimals(string count = "5")
+        public async Task<IActionResult> AfricanAnimals(string count)
         {
             try
             {
                 _logger.LogInformation("Endpoint AfricanAnimals executed");
                 int _count = int.Parse(count);
 
-                var animals = _service.AfricanAnimals(_count);
+
+                List<IAnimal> animals = _service.AfricanAnimals(_count);
+                //List<IAnimal> animals = new csAnimalsService1().AfricanAnimals(_count);
+
 
                 return Ok(animals);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
            
@@ -82,6 +87,7 @@ namespace AppWebApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
            

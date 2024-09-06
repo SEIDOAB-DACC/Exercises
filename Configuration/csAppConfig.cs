@@ -14,6 +14,7 @@ public class csAppConfig
 
     #region Configuration data structures
     private static csConfAddress _address = new csConfAddress();
+    private static csSecretKey _keys = new csSecretKey();
     #endregion
 
 
@@ -28,6 +29,7 @@ public class csAppConfig
         _configuration = builder.Build();
 
         _configuration.Bind("Address", _address);
+        _configuration.Bind("SuperSecretKeys", _keys);
 
     }
 
@@ -55,6 +57,15 @@ public class csAppConfig
             }
             return _address;
         }} 
+    public static csSecretKey SecretKeys { 
+    get
+    {
+        if (_instance == null)
+        {
+            _instance = new csAppConfig();
+        }
+        return _keys;
+    }} 
 }
 
 public class csConfAddress
@@ -63,4 +74,8 @@ public class csConfAddress
     public int Zip { get; set;}
     public string City { get; set;}
 }
-
+public class csSecretKey
+{
+    public string EncryptionKey { get; set; }
+    public int NrOfEncryptions { get; set; }
+}
