@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Configuration;
 using Seido.Utilities.SeedGenerator;
 
@@ -5,7 +6,12 @@ namespace Models;
 
 public class csAttraction :ISeed<csAttraction>
 {
+    [Key]
+    public Guid AttractionId {get; set;} = Guid.NewGuid();
+    
     public string Name { get; set; }
+
+    //Navigation props
     public List<csComment> Comments { get; set; }
 
     #region seeder

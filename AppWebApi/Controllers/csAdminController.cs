@@ -26,14 +26,14 @@ namespace AppWebApi.Controllers
         //GET: api/csAdmin/Info
         [HttpGet()]
         [ActionName("Info")]
-        [ProducesResponseType(200, Type = typeof(csConfAddress))]
+        [ProducesResponseType(200, Type = typeof(string))]
         [ProducesResponseType(400, Type = typeof(string))]
         public async Task<IActionResult> Info()
         {
             try
             {
                 _logger.LogInformation("Endpoint Info executed");
-                return Ok(csAppConfig.SecretKeys);
+                return Ok(csAppConfig.SecretSource);
             }
             catch (Exception ex)
             {

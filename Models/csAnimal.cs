@@ -1,10 +1,13 @@
 using Configuration;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Seido.Utilities.SeedGenerator;
 
 namespace Models;
 
 public interface IAnimal
 {
+    public Guid AnimalId { get; set; }
     public AnimalKind Kind { get; set; }
     public int Age { get; set; }
     public string Name { get; set; }
@@ -13,8 +16,10 @@ public interface IAnimal
 
 
 public enum AnimalKind {Zebra, Elephant, Lion, Leopard, Gasell}
-public class csAnimal :ISeed<csAnimal>, IAnimal
+public class csAnimal :IAnimal, ISeed<csAnimal>
 {
+    [Key]
+    public Guid AnimalId { get; set; } = Guid.NewGuid();
     public AnimalKind Kind { get; set; }
     public int Age { get; set; }
     public string Name { get; set; }
