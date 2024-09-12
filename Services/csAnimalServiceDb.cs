@@ -1,6 +1,8 @@
 using Configuration;
 using Models;
 using DbContext;
+using DbRepos;
+
 using Seido.Utilities.SeedGenerator;
 
 namespace Services;
