@@ -46,7 +46,7 @@ namespace AppWebApi.Controllers
         //GET: api/csAdmin/AfricanAnimals
         [HttpGet()]
         [ActionName("AfricanAnimals")]
-        [ProducesResponseType(200, Type = typeof(List<csAnimal>))]
+        [ProducesResponseType(200, Type = typeof(List<IAnimal>))]
         [ProducesResponseType(400, Type = typeof(string))]
         public async Task<IActionResult> AfricanAnimals(string count)
         {

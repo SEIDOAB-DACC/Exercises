@@ -25,7 +25,15 @@ public class csAnimalRepo : IAnimalRepo
         var _seeder = new csSeedGenerator(fn);
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
+            var zoos = _seeder.ItemsToList<csZooDbM>(5);
             var animals = _seeder.ItemsToList<csAnimalDbM>(_count);
+
+            foreach (var a in animals)
+            {
+                a.ZooDbM = _seeder.FromList(zoos);
+            }
+            
+            
             db.Animals.AddRange(animals);
 
             db.SaveChanges();

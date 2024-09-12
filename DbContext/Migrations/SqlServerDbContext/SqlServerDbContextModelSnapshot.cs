@@ -43,9 +43,47 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.Property<bool>("Seeded")
                         .HasColumnType("bit");
 
+                    b.Property<Guid>("ZooDbMZooId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("AnimalId");
 
+                    b.HasIndex("ZooDbMZooId");
+
                     b.ToTable("Animals");
+                });
+
+            modelBuilder.Entity("DbModels.csZooDbM", b =>
+                {
+                    b.Property<Guid>("ZooId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("Seeded")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ZooId");
+
+                    b.ToTable("Zoos");
+                });
+
+            modelBuilder.Entity("DbModels.csAnimalDbM", b =>
+                {
+                    b.HasOne("DbModels.csZooDbM", "ZooDbM")
+                        .WithMany("AnimalsDbM")
+                        .HasForeignKey("ZooDbMZooId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ZooDbM");
+                });
+
+            modelBuilder.Entity("DbModels.csZooDbM", b =>
+                {
+                    b.Navigation("AnimalsDbM");
                 });
 #pragma warning restore 612, 618
         }
