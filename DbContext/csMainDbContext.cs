@@ -6,7 +6,6 @@ using System;
 using Microsoft.Identity.Client;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Models;
-using DbModels;
 using Microsoft.Extensions.Options;
 
 namespace DbContext;
@@ -19,7 +18,7 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
     static public string Heartbeat { get; } = $"Heartbeat from namespace {nameof(DbContextOptions)}, class {nameof(csMainDbContext)}";
 
     #region C# model of database tables
-    public DbSet<csAnimalDbM> Animals { get; set; }
+    public DbSet<csAnimal> Animals { get; set; }
     // public DbSet<csAttraction> Attractions { get; set; }
     // public DbSet<csComment> Comments { get; set; }
     #endregion
