@@ -1,9 +1,9 @@
 using Models;
-
+using DbModels;
 namespace DbRepos;
 
 public interface IAnimalRepo
 {
-    public List<IAnimal> AfricanAnimals(int _count);
+    public List<csAnimalDbM> AfricanAnimals(int _count);
     public void Seed(int _count);
 }

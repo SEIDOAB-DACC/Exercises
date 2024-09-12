@@ -1,5 +1,6 @@
 ﻿using Configuration;
 using Models;
+using DbModels;
 using DbContext;
 using Seido.Utilities.SeedGenerator;
 
@@ -10,11 +11,11 @@ public class csAnimalRepo : IAnimalRepo
 
     private const string seedSource = "./friends-seeds1.json";
 
-    public List<IAnimal> AfricanAnimals(int _count)
+    public List<csAnimalDbM> AfricanAnimals(int _count)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
-            List<IAnimal> animals = db.Animals.Take(_count).ToList<IAnimal>();
+            List<csAnimalDbM> animals = db.Animals.Take(_count).ToList();
             return animals;        
         }
     }
@@ -24,7 +25,7 @@ public class csAnimalRepo : IAnimalRepo
         var _seeder = new csSeedGenerator(fn);
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
-            var animals = _seeder.ItemsToList<csAnimal>(_count);
+            var animals = _seeder.ItemsToList<csAnimalDbM>(_count);
             db.Animals.AddRange(animals);
 
             db.SaveChanges();

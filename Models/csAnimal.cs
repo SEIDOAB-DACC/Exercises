@@ -1,7 +1,6 @@
 using Configuration;
 using Seido.Utilities.SeedGenerator;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace Models;
 
@@ -18,7 +17,6 @@ public interface IAnimal
 public enum AnimalKind {Zebra, Elephant, Lion, Leopard, Gasell}
 public class csAnimal :IAnimal, ISeed<csAnimal>
 {
-    [Key]
     public virtual Guid AnimalId { get; set; } = Guid.NewGuid();
     public AnimalKind Kind { get; set; }
     public int Age { get; set; }
@@ -30,6 +28,7 @@ public class csAnimal :IAnimal, ISeed<csAnimal>
 
     public virtual csAnimal Seed (csSeedGenerator _seeder)
     {
+        AnimalId = Guid.NewGuid();
         Seeded = true;
         Kind = _seeder.FromEnum<AnimalKind>();
         Age = _seeder.Next(0, 11);

@@ -22,7 +22,7 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Models.csAnimal", b =>
+            modelBuilder.Entity("DbModels.csAnimalDbM", b =>
                 {
                     b.Property<Guid>("AnimalId")
                         .ValueGeneratedOnAdd()
