@@ -19,8 +19,8 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
 
     #region C# model of database tables
     public DbSet<csAnimal> Animals { get; set; }
-    public DbSet<csAttraction> Attractions { get; set; }
-    public DbSet<csComment> Comments { get; set; }
+    // public DbSet<csAttraction> Attractions { get; set; }
+    // public DbSet<csComment> Comments { get; set; }
     #endregion
 
 

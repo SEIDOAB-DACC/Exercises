@@ -70,6 +70,31 @@ namespace AppWebApi.Controllers
            
         }
 
+        //GET: api/csAdmin/AfricanAnimals
+        [HttpGet()]
+        [ActionName("Seed")]
+        [ProducesResponseType(200, Type = typeof(string))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> Seed(string count)
+        {
+            try
+            {
+                _logger.LogInformation("Endpoint Seed executed");
+                int _count = int.Parse(count);
+
+
+                _service.Seed(_count);
+
+
+                return Ok("Seeded");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
+           
+        }
 
         //GET: api/csAdmin/AfricanAnimals
         [HttpGet()]

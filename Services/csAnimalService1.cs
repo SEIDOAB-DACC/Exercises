@@ -22,4 +22,6 @@ public class csAnimalsService1: IAnimalsService {
             var animals = _seeder.ItemsToList<csAnimal>(_count).ToList<IAnimal>();
             return animals;
         }
+
+        public void Seed (int _count) => throw new NotImplementedException();
 }

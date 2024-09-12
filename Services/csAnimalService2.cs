@@ -15,6 +15,8 @@ public class csAnimalsService2: IAnimalsService {
             return _animals;
         }
 
+        public void Seed (int _count) => throw new NotImplementedException();
+        
         public csAnimalsService2()
         {
             var fn = Path.GetFullPath(seedSource);
