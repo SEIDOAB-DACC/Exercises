@@ -1,5 +1,5 @@
 ﻿using Configuration;
-using Models;
+using DbModels;
 using DbContext;
 using Seido.Utilities.SeedGenerator;
 
@@ -14,7 +14,7 @@ public class csAnimalRepo : IAnimalRepo
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
-            var animals = db.Animals.Take(_count).ToList<IAnimal>();
+            List<IAnimal> animals = new List<IAnimal>();//db.Animals.Take(_count).ToList<IAnimal>();
             return animals;        
         }
     }
@@ -27,8 +27,8 @@ public class csAnimalRepo : IAnimalRepo
             // List<csAnimal> animals = new List<csAnimal>();
             // animals.Add(new csAnimal(){ Name = "AAAA"});
             // animals.Add(new csAnimal(){ Name = "BBBB"});
-            var animals = _seeder.ItemsToList<csAnimal>(_count);
-            db.Animals.AddRange(animals);
+            //var animals = _seeder.ItemsToList<csAnimalDbM>(_count);
+            //db.Animals.AddRange(animals);
 
             db.SaveChanges();
 

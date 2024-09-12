@@ -17,6 +17,15 @@ public class csAnimalServiceDb: IAnimalsService {
 
     public void Seed(int _count) => _repo.Seed(_count);
 
+    public List<IAnimal> SeedAndRead(int _count)
+    {
+        _repo.Seed(_count);
+        var animals = _repo.AfricanAnimals(_count);
+
+        return animals;
+    }
+    
+    
     public csAnimalServiceDb(IAnimalRepo repo)
     {
         _repo = repo;
