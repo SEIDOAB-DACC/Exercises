@@ -3,6 +3,7 @@ using Models;
 using DbModels;
 using DbContext;
 using Seido.Utilities.SeedGenerator;
+using Microsoft.EntityFrameworkCore;
 
 namespace DbRepos;
 
@@ -15,7 +16,7 @@ public class csAnimalRepo : IAnimalRepo
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
-            List<csAnimalDbM> animals = db.Animals.Take(_count).ToList();
+            List<csAnimalDbM> animals = db.Animals.Include(a => a.ZooDbM).Take(_count).ToList();
             return animals;        
         }
     }
